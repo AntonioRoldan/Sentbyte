@@ -59,13 +59,6 @@ def scatter_articles(x, y, paper):
     plt.scatter(x, y)
     plt.show()
 
-def bar_articles(x, y, paper):
-    plt.bar(x, y)
-    plt.title(paper)
-    plt.ylabel('Deceitful')
-    plt.xlabel('Truthful')
-    plt.show()
-
 def sentbyte():
     """It will find out if news from different sources are fake or real"""
     print('How much truth is there in the world today?')
