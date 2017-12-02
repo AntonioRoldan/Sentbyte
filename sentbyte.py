@@ -1,6 +1,7 @@
 from newspaper import *
 from textblob import TextBlob
-
+from matplotlib import pyplot as plt
+from matplotlib import style
 papers = []
 
 def collect_papers():
@@ -23,30 +24,72 @@ def collect_articles_to(paper):
     articles = []
     title_to_body = {}
     for url in paper.category_urls():
-        print(url)
         article = Article(url=url)
         articles.append(article)
     parsed_articles = parse_articles(articles)
     for article in parsed_articles:
-        if 'Terms of Service' in article.text.split():
+        article_sentiment = TextBlob(article.text).sentiment
+        if not article_sentiment.polarity and not article_sentiment.subjectivity: #Neutral articles must be filtered out
             pass
         else:
             title_to_body[article.title] = article.text
     return title_to_body
 
+def display_articles(truthful, deceitful):
+    print("Truthful articles")
+    print("\n")
+    for article in truthful:
+        print(article)
+        print("\n")
+    print("Deceitful articles")
+    for article in deceitful:
+        print(article)
+        print("\n")
+
+def plot_articles(x, y, paper):
+    plt.plot(x, y)
+    plt.title(paper)
+    plt.ylabel('Deceitful')
+    plt.xlabel('Truthful')
+    plt.show()
+
+def scatter_articles(x, y, paper):
+    style.use('ggplot')
+    plt.title(paper)
+    plt.scatter(x, y)
+    plt.show()
+
+def bar_articles(x, y, paper):
+    plt.bar(x, y)
+    plt.title(paper)
+    plt.ylabel('Deceitful')
+    plt.xlabel('Truthful')
+    plt.show()
+
 def sentbyte():
-    print('How much truth is there in the world?')
+    """It will find out if news from different sources are fake or real"""
+    print('How much truth is there in the world today?')
+    colour_index = 0
     paper_to_articles = {} #We store
     for paper in collect_papers():
         papers.append(paper.brand)
         paper_to_articles[paper.brand] = collect_articles_to(paper=paper)
-        #print(paper_to_articles[paper.brand])
-        #print("\n")
     for paper in papers:
+        x = []  # Stores truthful news
+        y = []  # Stores deceitful news
+        truthful = []
+        deceitful = []
         headlines = paper_to_articles[paper]
         for headline in headlines:
-            print(paper_to_articles[paper][headline]) #We extract news one by one
-            print("\n")
-
+            article = TextBlob(paper_to_articles[paper][headline]) #We extract news one by one
+            if article.sentiment.polarity > article.sentiment.subjectivity:
+                truthful.append(article)
+            else:
+                deceitful.append(article)
+            x.append(article.sentiment.polarity*2)
+            y.append(article.sentiment.subjectivity*2)
+        scatter_articles(x, y, paper)
+        plot_articles(x, y, paper)
+        display_articles(truthful, deceitful)
 if __name__ == '__main__':
     sentbyte()
