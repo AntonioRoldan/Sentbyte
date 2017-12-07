@@ -13,8 +13,10 @@ An example from the independent
 
 An example from the guardian 
 
+<img width="1280" alt="screen shot 2017-12-07 at 20 43 58" src="https://user-images.githubusercontent.com/22200326/33735414-8392a3e2-db8f-11e7-906b-03322dca32ce.png">
 
 
 
-Trying to think of coding as a form of art. 
+
+Trying to think of coding as a form of art... 
 
