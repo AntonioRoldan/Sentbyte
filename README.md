@@ -9,6 +9,10 @@ The graphs displaying the data, show the relation between truth and deceitfulnes
 The distribution of the data is giving us an insight on how varied the opinions of a certain magazine can be as well as the polarity of its content.
 
 An example from the independent 
+<img width="1280" alt="screen shot 2017-12-07 at 20 24 30" src="https://user-images.githubusercontent.com/22200326/33734654-66d09d2e-db8d-11e7-96e2-0fb2b7100ba1.png">
+
+An example from the guardian 
+
 
 
 
