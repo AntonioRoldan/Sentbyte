@@ -2,6 +2,9 @@ from newspaper import *
 from textblob import TextBlob
 from matplotlib import pyplot as plt
 from matplotlib import style
+import seaborn as sns
+import pandas as pd
+
 papers = []
 
 def collect_papers():
@@ -35,16 +38,27 @@ def collect_articles_to(paper):
             title_to_body[article.title] = article.text
     return title_to_body
 
-def display_articles(truthful, deceitful):
-    print("Truthful articles")
+def print_space(str):
+    print(str)
     print("\n")
+def set_data(xs, ys):
+    data = pd.DataFrame()
+    data['x'] = xs
+    data['y'] = ys
+    return data
+
+
+def display_articles(truthful, deceitful, paper):
+    print_space("Source: ")
+    print_space(paper)
+    print_space("Truthful articles: ")
+    truthful = list(set(truthful))
+    deceitful = list(set(deceitful))
     for article in truthful:
-        print(article)
-        print("\n")
-    print("Deceitful articles")
+        print_space(article)
+    print_space("Deceitful articles: ")
     for article in deceitful:
-        print(article)
-        print("\n")
+        print_space(article)
 
 def plot_articles(x, y, paper):
     plt.plot(x, y)
@@ -53,11 +67,14 @@ def plot_articles(x, y, paper):
     plt.xlabel('Truthful')
     plt.show()
 
-def scatter_articles(x, y, paper):
-    style.use('ggplot')
+def scatter_articles(xs, ys, paper):
+    data = set_data(xs, ys)
+    sns.set_context("notebook", font_scale=1.1)
+    sns.set_style("darkgrid")
+    sns.lmplot('x', 'y', data=data, fit_reg=True)
     plt.title(paper)
-    plt.scatter(x, y)
-    plt.show()
+    plt.xlabel('Truthfulness')
+    plt.ylabel('Deceitfulness')
 
 def sentbyte():
     """It will find out if news from different sources are fake or real"""
@@ -83,6 +100,6 @@ def sentbyte():
             y.append(article.sentiment.subjectivity*2)
         scatter_articles(x, y, paper)
         plot_articles(x, y, paper)
-        display_articles(truthful, deceitful)
+        display_articles(truthful, deceitful, paper)
 if __name__ == '__main__':
     sentbyte()
