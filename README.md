@@ -11,7 +11,7 @@ The distribution of the data is giving us an insight on how varied the opinions 
 An example from the independent 
 <img width="1280" alt="screen shot 2017-12-07 at 20 24 30" src="https://user-images.githubusercontent.com/22200326/33734654-66d09d2e-db8d-11e7-96e2-0fb2b7100ba1.png">
 
-An example from the guardian 
+An example from the huffington post
 
 <img width="1280" alt="screen shot 2017-12-07 at 20 43 58" src="https://user-images.githubusercontent.com/22200326/33735414-8392a3e2-db8f-11e7-906b-03322dca32ce.png">
 
