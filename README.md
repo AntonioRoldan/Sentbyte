@@ -17,6 +17,3 @@ An example from the huffington post
 
 
 
-
-Trying to think of coding as a form of art... 
-
